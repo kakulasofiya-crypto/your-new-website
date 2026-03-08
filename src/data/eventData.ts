@@ -34,105 +34,27 @@ export interface DecorationOption {
   description: string;
 }
 
-export type BudgetTier = 'basic' | 'standard' | 'premium' | 'luxury' | 'ultra';
-
-export function getBudgetTier(budget: number): BudgetTier {
-  if (budget <= 10000) return 'basic';
-  if (budget <= 25000) return 'standard';
-  if (budget <= 50000) return 'premium';
-  if (budget <= 100000) return 'luxury';
-  return 'ultra';
-}
-
-export const themeDecorations: Record<ThemeType, Record<BudgetTier, DecorationOption[]>> = {
-  balloon: {
-    basic: [
-      { id: 'balloon-simple', label: 'Simple Balloon Bunch', image: 'https://images.unsplash.com/photo-1496843916299-590492c751f4?w=600&h=400&fit=crop', description: 'A cheerful bunch of colorful balloons' },
-      { id: 'balloon-basic-arch', label: 'Mini Balloon Arch', image: 'https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&h=400&fit=crop', description: 'Small balloon arch for the entrance' },
-    ],
-    standard: [
-      { id: 'balloon-arch', label: 'Balloon Arch Setup', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop', description: 'Classic balloon arch for entrance or stage' },
-      { id: 'balloon-cluster', label: 'Balloon Cluster Ceiling', image: 'https://images.unsplash.com/photo-1504389899666-225e63a1f8f7?w=600&h=400&fit=crop', description: 'Floating balloon clusters across the ceiling' },
-    ],
-    premium: [
-      { id: 'balloon-wall', label: 'Balloon Wall Backdrop', image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop', description: 'Full wall covered with designer balloons' },
-      { id: 'balloon-garland', label: 'Organic Balloon Garland', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop&q=80', description: 'Trendy organic balloon garland with mixed sizes' },
-    ],
-    luxury: [
-      { id: 'balloon-luxury-stage', label: 'Grand Balloon Stage', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=400&fit=crop', description: 'Full stage balloon installation with LED accents' },
-      { id: 'balloon-column', label: 'Balloon Columns & Arches', image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&h=400&fit=crop', description: 'Tall balloon columns with grand archway' },
-    ],
-    ultra: [
-      { id: 'balloon-immersive', label: 'Immersive Balloon Room', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop', description: 'Floor-to-ceiling balloon installation with lighting' },
-      { id: 'balloon-sculpture', label: 'Balloon Sculpture Art', image: 'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&h=400&fit=crop', description: 'Custom balloon sculptures & art installations' },
-    ],
-  },
-  floral: {
-    basic: [
-      { id: 'floral-simple', label: 'Simple Flower Arrangement', image: 'https://images.unsplash.com/photo-1561128290-005859ac81a3?w=600&h=400&fit=crop', description: 'Basic flower vases for tables' },
-      { id: 'floral-garland-basic', label: 'Marigold Garlands', image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&h=400&fit=crop', description: 'Traditional marigold string decorations' },
-    ],
-    standard: [
-      { id: 'floral-table', label: 'Table Centerpieces', image: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=400&fit=crop', description: 'Elegant table centerpieces with mixed flowers' },
-      { id: 'floral-entrance', label: 'Floral Entrance', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop', description: 'Flower-decorated entrance and pathway' },
-    ],
-    premium: [
-      { id: 'floral-mandap', label: 'Floral Mandap Setup', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop', description: 'Flower-covered mandap or focal point' },
-      { id: 'floral-hanging', label: 'Hanging Floral Chandeliers', image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop', description: 'Suspended floral arrangements from ceiling' },
-    ],
-    luxury: [
-      { id: 'floral-grand-stage', label: 'Grand Floral Stage', image: 'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&h=400&fit=crop', description: 'Full stage decorated with premium flowers' },
-      { id: 'floral-cascade', label: 'Cascading Flower Walls', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=400&fit=crop', description: 'Floor-to-ceiling cascading flower walls' },
-    ],
-    ultra: [
-      { id: 'floral-immersive', label: 'Immersive Floral Garden', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop', description: 'Transform venue into an indoor garden paradise' },
-      { id: 'floral-luxury-arch', label: 'Luxury Floral Archway', image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&h=400&fit=crop', description: 'Massive floral archway with exotic flowers' },
-    ],
-  },
-  elegant: {
-    basic: [
-      { id: 'elegant-candles', label: 'Candle & Fairy Lights', image: 'https://images.unsplash.com/photo-1504389899666-225e63a1f8f7?w=600&h=400&fit=crop', description: 'Simple candles with fairy light strings' },
-      { id: 'elegant-runner', label: 'Table Runner Setup', image: 'https://images.unsplash.com/photo-1496843916299-590492c751f4?w=600&h=400&fit=crop', description: 'Satin table runners with basic centerpieces' },
-    ],
-    standard: [
-      { id: 'elegant-drapes', label: 'Draped Backdrop', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop', description: 'Fabric drapes with warm lighting' },
-      { id: 'elegant-table', label: 'Formal Table Setting', image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop', description: 'Coordinated table settings with linens' },
-    ],
-    premium: [
-      { id: 'elegant-chandelier', label: 'Chandelier & Candles', image: 'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&h=400&fit=crop', description: 'Crystal chandeliers with candle arrangements' },
-      { id: 'elegant-stage', label: 'Draped Stage Setup', image: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=400&fit=crop', description: 'Luxurious fabric drapes with gold accents' },
-    ],
-    luxury: [
-      { id: 'elegant-lounge', label: 'Premium Lounge Area', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop', description: 'Sophisticated lounge with premium furniture' },
-      { id: 'elegant-gold', label: 'Gold & Crystal Setup', image: 'https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&h=400&fit=crop', description: 'Full gold theme with crystal accents throughout' },
-    ],
-    ultra: [
-      { id: 'elegant-royal', label: 'Royal Palace Theme', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop', description: 'Complete royal palace transformation' },
-      { id: 'elegant-bespoke', label: 'Bespoke Luxury Design', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=400&fit=crop', description: 'Custom-designed luxury décor with imported elements' },
-    ],
-  },
-  cartoon: {
-    basic: [
-      { id: 'cartoon-banner', label: 'Banner & Cutouts', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=400&fit=crop', description: 'Themed banner with small character cutouts' },
-      { id: 'cartoon-table-basic', label: 'Themed Table Setup', image: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop', description: 'Cartoon-themed plates, cups & tablecloth' },
-    ],
-    standard: [
-      { id: 'cartoon-stage', label: 'Character Stage', image: 'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&h=400&fit=crop', description: 'Stage with character backdrop and balloons' },
-      { id: 'cartoon-photo', label: 'Photo Booth Corner', image: 'https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&h=400&fit=crop', description: 'Fun photo booth with cartoon props' },
-    ],
-    premium: [
-      { id: 'cartoon-full', label: 'Full Theme Decoration', image: 'https://images.unsplash.com/photo-1496843916299-590492c751f4?w=600&h=400&fit=crop', description: 'Complete venue themed with cartoon characters' },
-      { id: 'cartoon-balloon-art', label: 'Character Balloon Art', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop', description: 'Custom balloon sculptures of characters' },
-    ],
-    luxury: [
-      { id: 'cartoon-immersive', label: 'Immersive Theme Park', image: 'https://images.unsplash.com/photo-1504389899666-225e63a1f8f7?w=600&h=400&fit=crop', description: 'Transform venue into a mini theme park' },
-      { id: 'cartoon-entrance', label: 'Grand Character Entrance', image: 'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&h=400&fit=crop', description: 'Giant character entrance arch with lighting' },
-    ],
-    ultra: [
-      { id: 'cartoon-world', label: 'Fantasy World Setup', image: 'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&h=400&fit=crop', description: 'Complete fantasy world with props & costumes' },
-      { id: 'cartoon-interactive', label: 'Interactive Play Zone', image: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=400&fit=crop', description: 'Interactive play zones with themed activities' },
-    ],
-  },
+export const themeDecorations: Record<ThemeType, DecorationOption[]> = {
+  balloon: [
+    { id: 'balloon-classic', label: 'Classic Balloon Arch Stage', image: '/balloon-stage-1.jpg', description: 'Grand balloon arch with colorful columns and warm stage lighting' },
+    { id: 'balloon-pink-gold', label: 'Pink & Gold Balloon Wall', image: '/balloon-stage-2.jpg', description: 'Elegant pink and gold balloon wall backdrop with ceiling clusters' },
+    { id: 'balloon-pastel', label: 'Pastel Balloon Canopy', image: '/balloon-stage-3.jpg', description: 'Dreamy pastel balloon canopy with LED stage lighting' },
+  ],
+  floral: [
+    { id: 'floral-mandap', label: 'Floral Mandap Stage', image: '/floral-stage-1.jpg', description: 'Traditional flower mandap with roses, marigolds and warm lighting' },
+    { id: 'floral-wall', label: 'Flower Wall & Chandeliers', image: '/floral-stage-2.jpg', description: 'Stunning flower wall backdrop with crystal chandeliers and table arrangements' },
+    { id: 'floral-arch', label: 'Grand Floral Archway', image: '/floral-stage-3.jpg', description: 'Luxurious multi-layered floral archway with rose petal pathway' },
+  ],
+  elegant: [
+    { id: 'elegant-drapes', label: 'Gold Drapes & Chandeliers', image: '/elegant-stage-1.jpg', description: 'Sweeping gold and white drapes with crystal chandeliers and lounge seating' },
+    { id: 'elegant-royal', label: 'Royal Gold Banquet', image: '/elegant-stage-2.jpg', description: 'Premium gold drape backdrop with formal table settings and candelabras' },
+    { id: 'elegant-white', label: 'White & Crystal Palace', image: '/elegant-stage-3.jpg', description: 'Pure white drapes with multiple crystal chandeliers and gold accents' },
+  ],
+  cartoon: [
+    { id: 'cartoon-stage', label: 'Character Birthday Stage', image: '/cartoon-stage-1.jpg', description: 'Colorful cartoon character stage with balloons, cutouts and cake setup' },
+    { id: 'cartoon-venue', label: 'Full Cartoon Venue', image: '/cartoon-stage-2.jpg', description: 'Complete venue with character standees, themed tables and colorful drapes' },
+    { id: 'cartoon-fantasy', label: 'Fantasy World Stage', image: '/cartoon-stage-3.jpg', description: 'Grand fantasy stage with life-size characters, balloon arch and lighting' },
+  ],
 };
 
 export const themeItems: Record<ThemeType, DecorationItem[]> = {
@@ -179,26 +101,10 @@ export const themeItems: Record<ThemeType, DecorationItem[]> = {
 };
 
 export const themeImages: Record<ThemeType, string[]> = {
-  balloon: [
-    'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1504389899666-225e63a1f8f7?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1525268323446-0505b6fe7778?w=600&h=400&fit=crop',
-  ],
-  floral: [
-    'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1561128290-005859ac81a3?w=600&h=400&fit=crop',
-  ],
-  elegant: [
-    'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1478146059778-26028b07395a?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=600&h=400&fit=crop',
-  ],
-  cartoon: [
-    'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=600&h=400&fit=crop',
-    'https://images.unsplash.com/photo-1527529482837-4698179dc6ce?w=600&h=400&fit=crop',
-  ],
+  balloon: ['/balloon-stage-1.jpg', '/balloon-stage-2.jpg', '/balloon-stage-3.jpg'],
+  floral: ['/floral-stage-1.jpg', '/floral-stage-2.jpg', '/floral-stage-3.jpg'],
+  elegant: ['/elegant-stage-1.jpg', '/elegant-stage-2.jpg', '/elegant-stage-3.jpg'],
+  cartoon: ['/cartoon-stage-1.jpg', '/cartoon-stage-2.jpg', '/cartoon-stage-3.jpg'],
 };
 
 export function formatCurrency(amount: number): string {
