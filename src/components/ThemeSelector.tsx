@@ -1,20 +1,23 @@
-import { themes, ThemeType } from '@/data/eventData';
+import { EventType, ThemeType, getThemesForEvent } from '@/data/eventData';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface Props {
+  eventType: EventType;
   onSelect: (theme: ThemeType) => void;
 }
 
-const ThemeSelector = ({ onSelect }: Props) => {
+const ThemeSelector = ({ eventType, onSelect }: Props) => {
+  const availableThemes = getThemesForEvent(eventType);
+
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="text-center space-y-2">
         <h2 className="text-3xl font-bold">Pick a Theme</h2>
         <p className="text-muted-foreground">Select a decoration theme for your event</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
-        {themes.map((theme) => (
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {availableThemes.map((theme) => (
           <Card
             key={theme.id}
             className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary/50 overflow-hidden group"
