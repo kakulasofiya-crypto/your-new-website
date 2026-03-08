@@ -1,32 +1,30 @@
-import { ThemeType, themeDecorations, getBudgetTier } from '@/data/eventData';
+import { ThemeType, themeDecorations } from '@/data/eventData';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { CheckCircle } from 'lucide-react';
 
 interface Props {
   theme: ThemeType;
-  budget: number;
   onSelect: (decorationId: string) => void;
 }
 
-const DecorationPicker = ({ theme, budget, onSelect }: Props) => {
-  const tier = getBudgetTier(budget);
-  const decorations = themeDecorations[theme][tier];
+const DecorationPicker = ({ theme, onSelect }: Props) => {
+  const decorations = themeDecorations[theme];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="text-center space-y-2">
-        <h2 className="text-3xl font-bold">Choose a Decoration Style</h2>
-        <p className="text-muted-foreground">Select the decoration setup you love</p>
+        <h2 className="text-3xl font-bold">How Should Your Event Look?</h2>
+        <p className="text-muted-foreground">Pick a stage & decoration style you love</p>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {decorations.map((deco) => (
           <Card
             key={deco.id}
             className="cursor-pointer transition-all duration-300 hover:shadow-lg hover:scale-[1.02] hover:border-primary/50 overflow-hidden group"
             onClick={() => onSelect(deco.id)}
           >
-            <AspectRatio ratio={3 / 2}>
+            <AspectRatio ratio={4 / 3}>
               <img
                 src={deco.image}
                 alt={deco.label}
