@@ -99,8 +99,8 @@ const Index = () => {
           <BudgetSelector onSelect={(b) => { setBudget(b); setStep('theme'); }} />
         )}
 
-        {step === 'theme' && (
-          <ThemeSelector onSelect={(t) => { setTheme(t); setStep('decoration'); }} />
+        {step === 'theme' && eventType && (
+          <ThemeSelector eventType={eventType} onSelect={(t) => { setTheme(t); setStep('decoration'); }} />
         )}
 
         {step === 'decoration' && theme && (

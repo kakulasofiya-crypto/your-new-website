@@ -1,5 +1,5 @@
 export type EventType = 'birthday' | 'engagement' | 'anniversary' | 'retirement' | 'babyshower' | 'housewarming' | 'corporate' | 'festival';
-export type ThemeType = 'balloon' | 'floral' | 'elegant' | 'cartoon';
+export type ThemeType = 'balloon' | 'floral' | 'elegant' | 'cartoon' | 'neon' | 'romantic' | 'royal';
 
 export const eventTypes: { id: EventType; label: string; emoji: string; description: string }[] = [
   { id: 'birthday', label: 'Birthday', emoji: '🎂', description: 'Celebrate another trip around the sun!' },
@@ -14,12 +14,34 @@ export const eventTypes: { id: EventType; label: string; emoji: string; descript
 
 export const budgetOptions = [10000, 25000, 50000, 100000, 200000];
 
-export const themes: { id: ThemeType; label: string; emoji: string; description: string; image: string }[] = [
-  { id: 'balloon', label: 'Balloon Theme', emoji: '🎈', description: 'Colorful balloons creating a festive atmosphere', image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&h=300&fit=crop' },
-  { id: 'floral', label: 'Floral Theme', emoji: '🌸', description: 'Beautiful flowers and natural elegance', image: 'https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=400&h=300&fit=crop' },
-  { id: 'elegant', label: 'Elegant Theme', emoji: '✨', description: 'Sophisticated and luxurious décor', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=400&h=300&fit=crop' },
-  { id: 'cartoon', label: 'Cartoon Theme', emoji: '🦄', description: 'Fun and playful cartoon characters', image: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400&h=300&fit=crop' },
-];
+export const allThemes: Record<ThemeType, { id: ThemeType; label: string; emoji: string; description: string; image: string }> = {
+  balloon: { id: 'balloon', label: 'Balloon Theme', emoji: '🎈', description: 'Colorful balloons creating a festive atmosphere', image: '/balloon-stage-1.jpg' },
+  floral: { id: 'floral', label: 'Floral Theme', emoji: '🌸', description: 'Beautiful flowers and natural elegance', image: '/floral-stage-1.jpg' },
+  elegant: { id: 'elegant', label: 'Elegant Theme', emoji: '✨', description: 'Sophisticated and luxurious décor', image: '/elegant-stage-1.jpg' },
+  cartoon: { id: 'cartoon', label: 'Cartoon Theme', emoji: '🦄', description: 'Fun and playful cartoon characters', image: '/cartoon-stage-1.jpg' },
+  neon: { id: 'neon', label: 'Neon Glow Theme', emoji: '💡', description: 'Vibrant neon lights & UV glow party vibes', image: '/neon-stage-1.jpg' },
+  romantic: { id: 'romantic', label: 'Romantic LED Theme', emoji: '💕', description: 'Fairy lights, roses & dreamy ambiance', image: '/romantic-stage-1.jpg' },
+  royal: { id: 'royal', label: 'Royal Gold Theme', emoji: '👑', description: 'Traditional Indian royal gold grandeur', image: '/royal-stage-1.jpg' },
+};
+
+// Map each event to its relevant themes
+export const eventThemeMap: Record<EventType, ThemeType[]> = {
+  birthday: ['cartoon', 'balloon', 'neon'],
+  engagement: ['floral', 'romantic', 'royal'],
+  anniversary: ['elegant', 'floral', 'romantic'],
+  retirement: ['elegant', 'balloon', 'floral'],
+  babyshower: ['cartoon', 'balloon', 'floral'],
+  housewarming: ['floral', 'elegant', 'royal'],
+  corporate: ['elegant', 'balloon', 'neon'],
+  festival: ['floral', 'royal', 'neon'],
+};
+
+export function getThemesForEvent(eventType: EventType) {
+  return eventThemeMap[eventType].map(id => allThemes[id]);
+}
+
+// Keep backward compat
+export const themes = Object.values(allThemes);
 
 export interface DecorationItem {
   name: string;
@@ -133,6 +155,72 @@ export const themeDecorations: Record<ThemeType, Record<BudgetTier, DecorationOp
       { id: 'cartoon-ultra-2', label: 'Immersive Character World', image: '/cartoon-ultra-2.jpg', description: 'Life-size animatronic characters, special effects and immersive play zones' },
     ],
   },
+  neon: {
+    basic: [
+      { id: 'neon-basic-1', label: 'LED Strip Glow', image: '/neon-basic-1.jpg', description: 'Simple neon LED strips on wall with UV glow sticks — budget home party' },
+      { id: 'neon-basic-2', label: 'Neon Sign & Balloons', image: '/neon-basic-2.jpg', description: 'Neon happy birthday sign with glow-in-dark balloons' },
+    ],
+    standard: [
+      { id: 'neon-std-1', label: 'Neon Party Stage', image: '/neon-standard-1.jpg', description: 'Multiple LED neon signs, UV balloons and neon table centerpieces' },
+      { id: 'neon-std-2', label: 'Glow Curtain Setup', image: '/neon-standard-2.jpg', description: 'LED curtain lights in neon colors with glow balloons and table setup' },
+    ],
+    premium: [
+      { id: 'neon-prem-1', label: 'DJ Neon Stage', image: '/neon-premium-1.jpg', description: 'Neon ring lights, LED panels, fog machine — premium DJ stage setup' },
+      { id: 'neon-prem-2', label: 'Neon Dance Floor', image: '/neon-premium-2.jpg', description: 'Neon arch entrance, LED dance floor and neon tube ceiling installations' },
+    ],
+    luxury: [
+      { id: 'neon-lux-1', label: 'Neon Lounge', image: '/neon-luxury-1.jpg', description: 'Massive LED installations, neon ceiling art, VIP neon lounge areas' },
+      { id: 'neon-lux-2', label: 'Neon Art Gallery', image: '/neon-luxury-2.jpg', description: 'Giant neon sculptures, LED pixel walls and laser light effects' },
+    ],
+    ultra: [
+      { id: 'neon-ultra-1', label: 'Neon Tunnel Experience', image: '/neon-ultra-1.jpg', description: 'Immersive LED tunnel entrance with holographic neon art throughout' },
+      { id: 'neon-ultra-2', label: 'Neon Palace', image: '/neon-ultra-2.jpg', description: 'Custom neon art ceiling, LED floor, laser shows and fog effects' },
+    ],
+  },
+  romantic: {
+    basic: [
+      { id: 'romantic-basic-1', label: 'Fairy Lights & Candles', image: '/romantic-basic-1.jpg', description: 'Simple fairy string lights on wall with LED candles and rose petals' },
+      { id: 'romantic-basic-2', label: 'LED Heart & Roses', image: '/romantic-basic-2.jpg', description: 'LED heart sign on wall with fairy light curtain and rose bouquets' },
+    ],
+    standard: [
+      { id: 'romantic-std-1', label: 'Love Light Stage', image: '/romantic-standard-1.jpg', description: 'Fairy light backdrop curtain with LED love letters and rose arrangements' },
+      { id: 'romantic-std-2', label: 'Candle Aisle Setup', image: '/romantic-standard-2.jpg', description: 'LED candle pathway, pink drapes, flower arrangements and couple stage' },
+    ],
+    premium: [
+      { id: 'romantic-prem-1', label: 'Heart Arch Stage', image: '/romantic-premium-1.jpg', description: 'Cascading fairy light waterfall, LED heart arch and hundreds of roses' },
+      { id: 'romantic-prem-2', label: 'Starry Canopy', image: '/romantic-premium-2.jpg', description: 'LED starry ceiling canopy, rose petal aisle and crystal candle holders' },
+    ],
+    luxury: [
+      { id: 'romantic-lux-1', label: 'Fairy Tale Hall', image: '/romantic-luxury-1.jpg', description: 'Thousands of fairy lights as starry sky, massive rose installations' },
+      { id: 'romantic-lux-2', label: 'Rose Tunnel', image: '/romantic-luxury-2.jpg', description: 'LED tunnel entrance, rose walls, floating candles and crystal decor' },
+    ],
+    ultra: [
+      { id: 'romantic-ultra-1', label: 'Romantic Wonderland', image: '/romantic-ultra-1.jpg', description: 'Entire ceiling fairy lights, thousands of roses, crystal installations' },
+      { id: 'romantic-ultra-2', label: 'Rose Palace', image: '/romantic-ultra-2.jpg', description: 'Massive rose wall backdrop, crystal chandelier, fog and spotlight effects' },
+    ],
+  },
+  royal: {
+    basic: [
+      { id: 'royal-basic-1', label: 'Gold Drape & Diyas', image: '/royal-basic-1.jpg', description: 'Gold fabric drape on wall with marigold garlands and brass diya lamps' },
+      { id: 'royal-basic-2', label: 'Traditional Puja Setup', image: '/royal-basic-2.jpg', description: 'Gold cloth backdrop with marigold torans, brass kalash and diyas' },
+    ],
+    standard: [
+      { id: 'royal-std-1', label: 'Gold Throne Stage', image: '/royal-standard-1.jpg', description: 'Gold drape backdrop with throne chairs, red carpet and brass urlis' },
+      { id: 'royal-std-2', label: 'Gold Mandap Stage', image: '/royal-standard-2.jpg', description: 'Gold and red fabric mandap with flower garlands and brass lamps' },
+    ],
+    premium: [
+      { id: 'royal-prem-1', label: 'Royal Pillar Stage', image: '/royal-premium-1.jpg', description: 'Ornate gold mandap with carved pillars, marigold garlands and chandelier' },
+      { id: 'royal-prem-2', label: 'Grand Ceremony Stage', image: '/royal-premium-2.jpg', description: 'Elaborate gold arch with red and gold flowers and professional lighting' },
+    ],
+    luxury: [
+      { id: 'royal-lux-1', label: 'Palace Darbar', image: '/royal-luxury-1.jpg', description: 'Massive golden mandap with intricate carvings and crystal chandeliers' },
+      { id: 'royal-lux-2', label: 'Royal Ballroom', image: '/royal-luxury-2.jpg', description: 'Gold pillars, red and gold drapes, multiple chandeliers, royal reception' },
+    ],
+    ultra: [
+      { id: 'royal-ultra-1', label: 'Maharaja Palace', image: '/royal-ultra-1.jpg', description: 'Entire hall in gold, massive carved mandap, crystal chandeliers, royal throne' },
+      { id: 'royal-ultra-2', label: 'Imperial Gold Hall', image: '/royal-ultra-2.jpg', description: 'Golden dome ceiling, enormous pillars, floral cascades, maharaja style' },
+    ],
+  },
 };
 
 export const themeItems: Record<ThemeType, DecorationItem[]> = {
@@ -176,6 +264,36 @@ export const themeItems: Record<ThemeType, DecorationItem[]> = {
     { name: 'Goodie Bags (20 pcs)', baseCost: 500, amazonSearch: 'cartoon+goodie+bags+party+kids' },
     { name: 'Photo Props Kit', baseCost: 400, amazonSearch: 'cartoon+photo+props+party+kit' },
   ],
+  neon: [
+    { name: 'LED Neon Strip Lights (5m)', baseCost: 800, amazonSearch: 'LED+neon+strip+lights+party' },
+    { name: 'Neon Sign (Happy Birthday/Party)', baseCost: 1500, amazonSearch: 'neon+sign+happy+birthday+party' },
+    { name: 'UV Blacklight Bulbs (4 pcs)', baseCost: 600, amazonSearch: 'UV+blacklight+bulb+party' },
+    { name: 'Glow Sticks (100 pcs)', baseCost: 400, amazonSearch: 'glow+sticks+party+bulk' },
+    { name: 'Neon Balloons (30 pcs)', baseCost: 500, amazonSearch: 'neon+glow+balloons+UV+reactive' },
+    { name: 'Fog Machine', baseCost: 2000, amazonSearch: 'fog+machine+party+LED' },
+    { name: 'LED Curtain Lights', baseCost: 700, amazonSearch: 'LED+curtain+lights+neon+colors' },
+    { name: 'Neon Table Centerpieces', baseCost: 450, amazonSearch: 'neon+glow+centerpiece+party' },
+  ],
+  romantic: [
+    { name: 'Fairy Light Curtain (3m x 3m)', baseCost: 800, amazonSearch: 'fairy+light+curtain+warm+white' },
+    { name: 'LED Heart Neon Sign', baseCost: 1200, amazonSearch: 'LED+heart+neon+sign+romantic' },
+    { name: 'Rose Petals (2000 pcs)', baseCost: 600, amazonSearch: 'rose+petals+red+romantic+decoration' },
+    { name: 'LED Candles (20 pcs)', baseCost: 800, amazonSearch: 'LED+candles+flameless+romantic' },
+    { name: 'Pink Satin Drapes', baseCost: 1500, amazonSearch: 'pink+satin+drape+backdrop+romantic' },
+    { name: 'Rose Bouquets (6 pcs)', baseCost: 1000, amazonSearch: 'artificial+rose+bouquet+romantic' },
+    { name: 'Love Letter Marquee Lights', baseCost: 1200, amazonSearch: 'LOVE+marquee+letter+lights' },
+    { name: 'Crystal Votive Holders (12 pcs)', baseCost: 900, amazonSearch: 'crystal+votive+candle+holder+romantic' },
+  ],
+  royal: [
+    { name: 'Gold Fabric Drapes', baseCost: 2000, amazonSearch: 'gold+fabric+drape+backdrop+Indian' },
+    { name: 'Marigold Garlands (20 pcs)', baseCost: 800, amazonSearch: 'marigold+garland+decoration+Indian' },
+    { name: 'Brass Diya Lamps (12 pcs)', baseCost: 1000, amazonSearch: 'brass+diya+lamp+Indian+decoration' },
+    { name: 'Gold Throne Chair Covers', baseCost: 1500, amazonSearch: 'gold+throne+chair+cover+royal' },
+    { name: 'Red Carpet Runner', baseCost: 800, amazonSearch: 'red+carpet+runner+event' },
+    { name: 'Brass Kalash & Urli Set', baseCost: 1200, amazonSearch: 'brass+kalash+urli+decoration' },
+    { name: 'Gold Toran & Door Hangings', baseCost: 600, amazonSearch: 'gold+toran+door+hanging+Indian' },
+    { name: 'Crystal Chandelier (LED)', baseCost: 2500, amazonSearch: 'crystal+chandelier+LED+party' },
+  ],
 };
 
 export const themeImages: Record<ThemeType, string[]> = {
@@ -183,6 +301,9 @@ export const themeImages: Record<ThemeType, string[]> = {
   floral: ['/floral-premium-1.jpg', '/floral-luxury-1.jpg', '/floral-ultra-1.jpg'],
   elegant: ['/elegant-premium-1.jpg', '/elegant-luxury-1.jpg', '/elegant-ultra-1.jpg'],
   cartoon: ['/cartoon-premium-1.jpg', '/cartoon-luxury-1.jpg', '/cartoon-ultra-1.jpg'],
+  neon: ['/neon-premium-1.jpg', '/neon-luxury-1.jpg', '/neon-ultra-1.jpg'],
+  romantic: ['/romantic-premium-1.jpg', '/romantic-luxury-1.jpg', '/romantic-ultra-1.jpg'],
+  royal: ['/royal-premium-1.jpg', '/royal-luxury-1.jpg', '/royal-ultra-1.jpg'],
 };
 
 export function formatCurrency(amount: number): string {
