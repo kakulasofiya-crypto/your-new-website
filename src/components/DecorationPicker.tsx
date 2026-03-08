@@ -1,15 +1,17 @@
-import { ThemeType, themeDecorations } from '@/data/eventData';
+import { ThemeType, themeDecorations, getBudgetTier } from '@/data/eventData';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { CheckCircle } from 'lucide-react';
 
 interface Props {
   theme: ThemeType;
+  budget: number;
   onSelect: (decorationId: string) => void;
 }
 
-const DecorationPicker = ({ theme, onSelect }: Props) => {
-  const decorations = themeDecorations[theme];
+const DecorationPicker = ({ theme, budget, onSelect }: Props) => {
+  const tier = getBudgetTier(budget);
+  const decorations = themeDecorations[theme][tier];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
