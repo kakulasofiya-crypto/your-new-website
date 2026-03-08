@@ -1,15 +1,17 @@
-import { ThemeType, themeDecorations } from '@/data/eventData';
+import { ThemeType, themeDecorations, getBudgetTier } from '@/data/eventData';
 import { Card, CardContent } from '@/components/ui/card';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { CheckCircle } from 'lucide-react';
 
 interface Props {
   theme: ThemeType;
+  budget: number;
   onSelect: (decorationId: string) => void;
 }
 
-const DecorationPicker = ({ theme, onSelect }: Props) => {
-  const decorations = themeDecorations[theme];
+const DecorationPicker = ({ theme, budget, onSelect }: Props) => {
+  const tier = getBudgetTier(budget);
+  const decorations = themeDecorations[theme][tier];
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -17,7 +19,7 @@ const DecorationPicker = ({ theme, onSelect }: Props) => {
         <h2 className="text-3xl font-bold">How Should Your Event Look?</h2>
         <p className="text-muted-foreground">Pick a stage & decoration style you love</p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         {decorations.map((deco) => (
           <Card
             key={deco.id}

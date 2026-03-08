@@ -104,7 +104,7 @@ const Index = () => {
         )}
 
         {step === 'decoration' && theme && (
-          <DecorationPicker theme={theme} onSelect={(d) => { setDecoration(d); setStep('products'); }} />
+          <DecorationPicker theme={theme} budget={budget!} onSelect={(d) => { setDecoration(d); setStep('products'); }} />
         )}
 
         {step === 'products' && theme && budget && (

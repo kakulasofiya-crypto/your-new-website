@@ -34,77 +34,105 @@ export interface DecorationOption {
   description: string;
 }
 
-export const themeDecorations: Record<ThemeType, DecorationOption[]> = {
-  balloon: [
-    { id: 'balloon-classic', label: 'Classic Balloon Arch Stage', image: '/balloon-stage-1.jpg', description: 'Grand balloon arch with colorful columns and warm stage lighting' },
-    { id: 'balloon-pink-gold', label: 'Pink & Gold Balloon Wall', image: '/balloon-stage-2.jpg', description: 'Elegant pink and gold balloon wall backdrop with ceiling clusters' },
-    { id: 'balloon-pastel', label: 'Pastel Balloon Canopy', image: '/balloon-stage-3.jpg', description: 'Dreamy pastel balloon canopy with LED stage lighting' },
-  ],
-  floral: [
-    { id: 'floral-mandap', label: 'Floral Mandap Stage', image: '/floral-stage-1.jpg', description: 'Traditional flower mandap with roses, marigolds and warm lighting' },
-    { id: 'floral-wall', label: 'Flower Wall & Chandeliers', image: '/floral-stage-2.jpg', description: 'Stunning flower wall backdrop with crystal chandeliers and table arrangements' },
-    { id: 'floral-arch', label: 'Grand Floral Archway', image: '/floral-stage-3.jpg', description: 'Luxurious multi-layered floral archway with rose petal pathway' },
-  ],
-  elegant: [
-    { id: 'elegant-drapes', label: 'Gold Drapes & Chandeliers', image: '/elegant-stage-1.jpg', description: 'Sweeping gold and white drapes with crystal chandeliers and lounge seating' },
-    { id: 'elegant-royal', label: 'Royal Gold Banquet', image: '/elegant-stage-2.jpg', description: 'Premium gold drape backdrop with formal table settings and candelabras' },
-    { id: 'elegant-white', label: 'White & Crystal Palace', image: '/elegant-stage-3.jpg', description: 'Pure white drapes with multiple crystal chandeliers and gold accents' },
-  ],
-  cartoon: [
-    { id: 'cartoon-stage', label: 'Character Birthday Stage', image: '/cartoon-stage-1.jpg', description: 'Colorful cartoon character stage with balloons, cutouts and cake setup' },
-    { id: 'cartoon-venue', label: 'Full Cartoon Venue', image: '/cartoon-stage-2.jpg', description: 'Complete venue with character standees, themed tables and colorful drapes' },
-    { id: 'cartoon-fantasy', label: 'Fantasy World Stage', image: '/cartoon-stage-3.jpg', description: 'Grand fantasy stage with life-size characters, balloon arch and lighting' },
-  ],
-};
+export type BudgetTier = 'basic' | 'standard' | 'premium' | 'luxury' | 'ultra';
 
-export const themeItems: Record<ThemeType, DecorationItem[]> = {
-  balloon: [
-    { name: 'Helium Balloons (50 pcs)', baseCost: 800, amazonSearch: 'helium+balloons+party+50+pack' },
-    { name: 'Balloon Arch Kit', baseCost: 1200, amazonSearch: 'balloon+arch+decoration+kit' },
-    { name: 'LED Balloon Lights', baseCost: 500, amazonSearch: 'LED+balloon+lights+party' },
-    { name: 'Balloon Pump', baseCost: 300, amazonSearch: 'balloon+pump+electric' },
-    { name: 'Confetti Balloons (20 pcs)', baseCost: 400, amazonSearch: 'confetti+balloons+gold' },
-    { name: 'Foil Number/Letter Balloons', baseCost: 600, amazonSearch: 'foil+letter+balloons+gold' },
-    { name: 'Ribbon & String', baseCost: 150, amazonSearch: 'balloon+ribbon+curling' },
-    { name: 'Balloon Weights', baseCost: 250, amazonSearch: 'balloon+weights+party' },
-  ],
-  floral: [
-    { name: 'Artificial Flower Garlands (5 pcs)', baseCost: 1500, amazonSearch: 'artificial+flower+garland+decoration' },
-    { name: 'Rose Petals (1000 pcs)', baseCost: 400, amazonSearch: 'rose+petals+decoration+1000' },
-    { name: 'Flower Vases (Set of 3)', baseCost: 1200, amazonSearch: 'flower+vase+decoration+set' },
-    { name: 'Marigold Strings (10 pcs)', baseCost: 600, amazonSearch: 'marigold+flower+string+decoration' },
-    { name: 'Floral Backdrop Curtain', baseCost: 2000, amazonSearch: 'floral+backdrop+curtain+party' },
-    { name: 'LED Fairy Lights', baseCost: 500, amazonSearch: 'LED+fairy+lights+warm+white' },
-    { name: 'Floral Centerpieces', baseCost: 800, amazonSearch: 'floral+centerpiece+table+decoration' },
-    { name: 'Potpourri & Fragrance', baseCost: 300, amazonSearch: 'potpourri+fragrance+party' },
-  ],
-  elegant: [
-    { name: 'Gold & White Drapes', baseCost: 2500, amazonSearch: 'gold+white+drape+backdrop+decoration' },
-    { name: 'Crystal Candle Holders (Set of 6)', baseCost: 1800, amazonSearch: 'crystal+candle+holder+set+elegant' },
-    { name: 'LED Candles (12 pcs)', baseCost: 600, amazonSearch: 'LED+candles+flameless+elegant' },
-    { name: 'Gold Table Runner', baseCost: 500, amazonSearch: 'gold+table+runner+elegant' },
-    { name: 'Premium Photo Backdrop', baseCost: 2000, amazonSearch: 'premium+photo+backdrop+party' },
-    { name: 'Champagne Glass Set (12 pcs)', baseCost: 1200, amazonSearch: 'champagne+glass+set+12+elegant' },
-    { name: 'Satin Chair Covers (10 pcs)', baseCost: 1500, amazonSearch: 'satin+chair+covers+party' },
-    { name: 'Gold Sequin Tablecloth', baseCost: 800, amazonSearch: 'gold+sequin+tablecloth' },
-  ],
-  cartoon: [
-    { name: 'Cartoon Character Balloons', baseCost: 600, amazonSearch: 'cartoon+character+foil+balloons' },
-    { name: 'Themed Paper Plates (50 pcs)', baseCost: 400, amazonSearch: 'cartoon+theme+paper+plates+party' },
-    { name: 'Character Cutouts (5 pcs)', baseCost: 800, amazonSearch: 'cartoon+character+cutout+standee' },
-    { name: 'Themed Tablecloth', baseCost: 300, amazonSearch: 'cartoon+themed+tablecloth+party' },
-    { name: 'Party Hats (20 pcs)', baseCost: 250, amazonSearch: 'cartoon+party+hats+kids' },
-    { name: 'Themed Banner & Bunting', baseCost: 350, amazonSearch: 'cartoon+banner+bunting+party' },
-    { name: 'Goodie Bags (20 pcs)', baseCost: 500, amazonSearch: 'cartoon+goodie+bags+party+kids' },
-    { name: 'Photo Props Kit', baseCost: 400, amazonSearch: 'cartoon+photo+props+party+kit' },
-  ],
-};
+export function getBudgetTier(budget: number): BudgetTier {
+  if (budget <= 10000) return 'basic';
+  if (budget <= 25000) return 'standard';
+  if (budget <= 50000) return 'premium';
+  if (budget <= 100000) return 'luxury';
+  return 'ultra';
+}
 
-export const themeImages: Record<ThemeType, string[]> = {
-  balloon: ['/balloon-stage-1.jpg', '/balloon-stage-2.jpg', '/balloon-stage-3.jpg'],
-  floral: ['/floral-stage-1.jpg', '/floral-stage-2.jpg', '/floral-stage-3.jpg'],
-  elegant: ['/elegant-stage-1.jpg', '/elegant-stage-2.jpg', '/elegant-stage-3.jpg'],
-  cartoon: ['/cartoon-stage-1.jpg', '/cartoon-stage-2.jpg', '/cartoon-stage-3.jpg'],
+export const themeDecorations: Record<ThemeType, Record<BudgetTier, DecorationOption[]>> = {
+  balloon: {
+    basic: [
+      { id: 'balloon-basic-1', label: 'Simple Balloon Bunch', image: '/balloon-basic-1.jpg', description: 'Colorful balloon bunch on table — cheerful home party setup' },
+      { id: 'balloon-basic-2', label: 'DIY Balloon Garland', image: '/balloon-basic-2.jpg', description: 'Simple balloon garland on wall with birthday banner' },
+    ],
+    standard: [
+      { id: 'balloon-std-1', label: 'Balloon Arch Stage', image: '/balloon-standard-1.jpg', description: 'Colorful balloon arch over decorated table with LED backdrop' },
+      { id: 'balloon-std-2', label: 'Ceiling Balloon Clusters', image: '/balloon-standard-2.jpg', description: 'Floating balloon clusters on ceiling with table balloons' },
+    ],
+    premium: [
+      { id: 'balloon-prem-1', label: 'Pink & Gold Balloon Wall', image: '/balloon-premium-1.jpg', description: 'Massive pink & gold balloon wall with chandelier and stage sofa' },
+      { id: 'balloon-prem-2', label: 'Balloon Canopy Stage', image: '/balloon-premium-2.jpg', description: 'Full balloon canopy over stage with foil letters and columns' },
+    ],
+    luxury: [
+      { id: 'balloon-lux-1', label: 'Chrome Balloon Archway', image: '/balloon-luxury-1.jpg', description: 'Grand chrome & metallic balloon archway in premium ballroom' },
+      { id: 'balloon-lux-2', label: 'Designer Balloon Wall', image: '/balloon-luxury-2.jpg', description: 'White & gold balloon wall with crystal chandelier and formal seating' },
+    ],
+    ultra: [
+      { id: 'balloon-ultra-1', label: 'Immersive Balloon Room', image: '/balloon-ultra-1.jpg', description: 'Thousands of balloons covering ceiling to floor with neon LED lighting' },
+      { id: 'balloon-ultra-2', label: 'Balloon Palace Entrance', image: '/balloon-ultra-2.jpg', description: 'Multiple giant balloon arches with red carpet and chrome balloons' },
+    ],
+  },
+  floral: {
+    basic: [
+      { id: 'floral-basic-1', label: 'Table Flower Vases', image: '/floral-basic-1.jpg', description: 'Simple flower vases with marigold garlands on wall' },
+      { id: 'floral-basic-2', label: 'Doorway Flower Garlands', image: '/floral-basic-2.jpg', description: 'Artificial flower garlands on doorway with marigold strings' },
+    ],
+    standard: [
+      { id: 'floral-std-1', label: 'Hanging Floral Ceiling', image: '/floral-standard-1.jpg', description: 'Flower garlands hanging from ceiling with table arrangements' },
+      { id: 'floral-std-2', label: 'Flower Wall Stage', image: '/floral-standard-2.jpg', description: 'Pink & white flower wall backdrop with sofa and arrangements' },
+    ],
+    premium: [
+      { id: 'floral-prem-1', label: 'Grand Floral Mandap', image: '/floral-premium-1.jpg', description: 'Elaborate flower mandap with roses, hanging garlands and warm lighting' },
+      { id: 'floral-prem-2', label: 'Flower Wall & Chandeliers', image: '/floral-premium-2.jpg', description: 'Massive flower wall with cascading garlands and crystal chandeliers' },
+    ],
+    luxury: [
+      { id: 'floral-lux-1', label: 'Luxury Flower Stage', image: '/floral-luxury-1.jpg', description: 'Thousands of flowers covering stage, ceiling and floor with chandeliers' },
+      { id: 'floral-lux-2', label: 'Indoor Garden Paradise', image: '/floral-luxury-2.jpg', description: 'Venue transformed into garden with hanging flowers and archway' },
+    ],
+    ultra: [
+      { id: 'floral-ultra-1', label: 'Enchanted Flower Tunnel', image: '/floral-ultra-1.jpg', description: 'Entire venue as enchanted garden with flower tunnels and chandeliers' },
+      { id: 'floral-ultra-2', label: 'Exotic Flower Palace', image: '/floral-ultra-2.jpg', description: 'Exotic flower installations with cascading arrangements and petal floor' },
+    ],
+  },
+  elegant: {
+    basic: [
+      { id: 'elegant-basic-1', label: 'Candle & Fairy Lights', image: '/elegant-basic-1.jpg', description: 'Simple candles and fairy lights on wall — cozy elegant setup' },
+      { id: 'elegant-basic-2', label: 'White Drape & Candles', image: '/elegant-basic-2.jpg', description: 'White fabric backdrop with candle arrangements on dining table' },
+    ],
+    standard: [
+      { id: 'elegant-std-1', label: 'Gold & White Drapes', image: '/elegant-standard-1.jpg', description: 'Gold and white drape backdrop with chandelier and formal tables' },
+      { id: 'elegant-std-2', label: 'Formal Stage Setup', image: '/elegant-standard-2.jpg', description: 'Draped stage with gold runners, candelabras and chair covers' },
+    ],
+    premium: [
+      { id: 'elegant-prem-1', label: 'Ceiling Drapes & Chandeliers', image: '/elegant-premium-1.jpg', description: 'Sweeping gold ceiling drapes with crystal chandelier and gold chargers' },
+      { id: 'elegant-prem-2', label: 'Grand Satin Stage', image: '/elegant-premium-2.jpg', description: 'Satin chair covers, crystal chandeliers, gold sequin stage backdrop' },
+    ],
+    luxury: [
+      { id: 'elegant-lux-1', label: 'Palace Ballroom', image: '/elegant-luxury-1.jpg', description: 'Massive crystal chandelier with floor-to-ceiling white & gold drapes' },
+      { id: 'elegant-lux-2', label: 'Royal Crystal Stage', image: '/elegant-luxury-2.jpg', description: 'Multiple chandeliers, white drapes, tufted sofa and gold accents' },
+    ],
+    ultra: [
+      { id: 'elegant-ultra-1', label: 'Royal Palace Setup', image: '/elegant-ultra-1.jpg', description: 'Complete royal palace with gold mirrors, crystal installations and luxury furniture' },
+      { id: 'elegant-ultra-2', label: 'Bespoke Crystal Hall', image: '/elegant-ultra-2.jpg', description: 'Crystal string ceiling, thousands of candles, red carpet, gold throne' },
+    ],
+  },
+  cartoon: {
+    basic: [
+      { id: 'cartoon-basic-1', label: 'Character Cutouts & Table', image: '/cartoon-basic-1.jpg', description: 'Simple character cutouts on wall with themed tablecloth and cake' },
+      { id: 'cartoon-basic-2', label: 'Banner & Party Setup', image: '/cartoon-basic-2.jpg', description: 'Character banner with themed plates, cups and party hats' },
+    ],
+    standard: [
+      { id: 'cartoon-std-1', label: 'Character Stage', image: '/cartoon-standard-1.jpg', description: 'Stage with character backdrop, balloon arch and themed tables' },
+      { id: 'cartoon-std-2', label: 'Colorful Drape Setup', image: '/cartoon-standard-2.jpg', description: 'Colorful drapes with balloon columns and cartoon decorations' },
+    ],
+    premium: [
+      { id: 'cartoon-prem-1', label: 'Grand Character Stage', image: '/cartoon-premium-1.jpg', description: 'Large character cutouts, balloon arch, themed backdrop with castle' },
+      { id: 'cartoon-prem-2', label: 'Full Theme Venue', image: '/cartoon-premium-2.jpg', description: 'Complete venue themed with balloon ceiling, character standees and props' },
+    ],
+    luxury: [
+      { id: 'cartoon-lux-1', label: 'Mini Theme Park', image: '/cartoon-luxury-1.jpg', description: 'Venue as mini theme park with castle stage, life-size characters' },
+      { id: 'cartoon-lux-2', label: 'Fantasy Stage & LED', image: '/cartoon-luxury-2.jpg', description: 'Giant character balloon sculptures, LED screens and spotlight effects' },
+    ],
+    ultra: [
+      { id: 'cartoon-ultra-1', label: 'Fantasy Castle World', image: '/cartoon-ultra-1.jpg', description: 'Custom built fairy tale castle with theatrical lighting and themed zones' },
+      { id: 'cartoon-ultra-2', label: 'Immersive Character World', image: '/cartoon-ultra-2.jpg', description: 'Life-size animatronic characters, special effects and immersive play zones' },
+    ],
+  },
 };
 
 export function formatCurrency(amount: number): string {
