@@ -1,25 +1,27 @@
 import { useState } from 'react';
-import { EventType, ThemeType } from '@/data/eventData';
+import { EventType, ThemeType, eventTypes } from '@/data/eventData';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, PartyPopper } from 'lucide-react';
 import EventSelector from '@/components/EventSelector';
 import BudgetSelector from '@/components/BudgetSelector';
 import ThemeSelector from '@/components/ThemeSelector';
-import ResultsPage from '@/components/ResultsPage';
+import DecorationPicker from '@/components/DecorationPicker';
+import ProductShowcase from '@/components/ProductShowcase';
 
-type Step = 'landing' | 'event' | 'budget' | 'theme' | 'results';
+type Step = 'landing' | 'event' | 'budget' | 'theme' | 'decoration' | 'products';
 
-const stepOrder: Step[] = ['landing', 'event', 'budget', 'theme', 'results'];
+const stepOrder: Step[] = ['landing', 'event', 'budget', 'theme', 'decoration', 'products'];
 
 const Index = () => {
   const [step, setStep] = useState<Step>('landing');
   const [eventType, setEventType] = useState<EventType | null>(null);
   const [budget, setBudget] = useState<number | null>(null);
   const [theme, setTheme] = useState<ThemeType | null>(null);
+  const [decoration, setDecoration] = useState<string | null>(null);
 
   const currentIndex = stepOrder.indexOf(step);
-  const progress = step === 'landing' ? 0 : step === 'results' ? 100 : (currentIndex / (stepOrder.length - 1)) * 100;
+  const progress = step === 'landing' ? 0 : step === 'products' ? 100 : (currentIndex / (stepOrder.length - 1)) * 100;
 
   const goBack = () => {
     const prev = stepOrder[currentIndex - 1];
@@ -31,11 +33,13 @@ const Index = () => {
     setEventType(null);
     setBudget(null);
     setTheme(null);
+    setDecoration(null);
   };
+
+  const eventLabel = eventType ? eventTypes.find(e => e.id === eventType)?.label || '' : '';
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
       <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-sm">
         <div className="container mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-2 cursor-pointer" onClick={reset}>
@@ -44,7 +48,7 @@ const Index = () => {
               Smart Event Organizer
             </span>
           </div>
-          {step !== 'landing' && step !== 'results' && (
+          {step !== 'landing' && step !== 'products' && (
             <Button variant="ghost" size="sm" onClick={goBack} className="gap-1">
               <ArrowLeft className="h-4 w-4" /> Back
             </Button>
@@ -57,7 +61,6 @@ const Index = () => {
         )}
       </header>
 
-      {/* Content */}
       <main className="container mx-auto px-4 py-8 max-w-5xl">
         {step === 'landing' && (
           <div className="flex flex-col items-center justify-center min-h-[70vh] text-center space-y-8 animate-in fade-in duration-700">
@@ -81,6 +84,9 @@ const Index = () => {
               <span>💑 Anniversaries</span>
               <span>🎉 Retirements</span>
               <span>👶 Baby Showers</span>
+              <span>🏠 Housewarming</span>
+              <span>🏢 Corporate</span>
+              <span>🪔 Festivals</span>
             </div>
           </div>
         )}
@@ -94,11 +100,15 @@ const Index = () => {
         )}
 
         {step === 'theme' && (
-          <ThemeSelector onSelect={(t) => { setTheme(t); setStep('results'); }} />
+          <ThemeSelector onSelect={(t) => { setTheme(t); setStep('decoration'); }} />
         )}
 
-        {step === 'results' && eventType && budget && theme && (
-          <ResultsPage eventType={eventType} budget={budget} theme={theme} onReset={reset} />
+        {step === 'decoration' && theme && (
+          <DecorationPicker theme={theme} onSelect={(d) => { setDecoration(d); setStep('products'); }} />
+        )}
+
+        {step === 'products' && theme && budget && (
+          <ProductShowcase theme={theme} budget={budget} eventLabel={eventLabel} onReset={reset} />
         )}
       </main>
     </div>
