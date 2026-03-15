@@ -3,25 +3,28 @@ import { EventType, ThemeType, eventTypes } from '@/data/eventData';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, PartyPopper } from 'lucide-react';
+import UserDetailsForm, { UserDetails } from '@/components/UserDetailsForm';
 import EventSelector from '@/components/EventSelector';
 import BudgetSelector from '@/components/BudgetSelector';
 import ThemeSelector from '@/components/ThemeSelector';
 import DecorationPicker from '@/components/DecorationPicker';
 import ProductShowcase from '@/components/ProductShowcase';
+import BookingConfirmation from '@/components/BookingConfirmation';
 
-type Step = 'landing' | 'event' | 'budget' | 'theme' | 'decoration' | 'products';
+type Step = 'landing' | 'details' | 'event' | 'budget' | 'theme' | 'decoration' | 'products' | 'booking';
 
-const stepOrder: Step[] = ['landing', 'event', 'budget', 'theme', 'decoration', 'products'];
+const stepOrder: Step[] = ['landing', 'details', 'event', 'budget', 'theme', 'decoration', 'products', 'booking'];
 
 const Index = () => {
   const [step, setStep] = useState<Step>('landing');
+  const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
   const [eventType, setEventType] = useState<EventType | null>(null);
   const [budget, setBudget] = useState<number | null>(null);
   const [theme, setTheme] = useState<ThemeType | null>(null);
   const [decoration, setDecoration] = useState<string | null>(null);
 
   const currentIndex = stepOrder.indexOf(step);
-  const progress = step === 'landing' ? 0 : step === 'products' ? 100 : (currentIndex / (stepOrder.length - 1)) * 100;
+  const progress = step === 'landing' ? 0 : step === 'booking' ? 100 : (currentIndex / (stepOrder.length - 1)) * 100;
 
   const goBack = () => {
     const prev = stepOrder[currentIndex - 1];
@@ -30,6 +33,7 @@ const Index = () => {
 
   const reset = () => {
     setStep('landing');
+    setUserDetails(null);
     setEventType(null);
     setBudget(null);
     setTheme(null);
@@ -48,7 +52,7 @@ const Index = () => {
               Smart Event Organizer
             </span>
           </div>
-          {step !== 'landing' && step !== 'products' && (
+          {step !== 'landing' && step !== 'booking' && (
             <Button variant="ghost" size="sm" onClick={goBack} className="gap-1">
               <ArrowLeft className="h-4 w-4" /> Back
             </Button>
@@ -74,7 +78,7 @@ const Index = () => {
                 cost estimates, and shopping links in minutes.
               </p>
             </div>
-            <Button size="lg" className="text-lg px-8 py-6 gap-2" onClick={() => setStep('event')}>
+            <Button size="lg" className="text-lg px-8 py-6 gap-2" onClick={() => setStep('details')}>
               <PartyPopper className="h-5 w-5" />
               Get Started
             </Button>
@@ -89,6 +93,10 @@ const Index = () => {
               <span>🪔 Festivals</span>
             </div>
           </div>
+        )}
+
+        {step === 'details' && (
+          <UserDetailsForm onSubmit={(d) => { setUserDetails(d); setStep('event'); }} />
         )}
 
         {step === 'event' && (
@@ -108,7 +116,18 @@ const Index = () => {
         )}
 
         {step === 'products' && theme && budget && (
-          <ProductShowcase theme={theme} budget={budget} eventLabel={eventLabel} onReset={reset} />
+          <ProductShowcase theme={theme} budget={budget} eventLabel={eventLabel} onReset={() => setStep('booking')} />
+        )}
+
+        {step === 'booking' && userDetails && eventType && theme && budget && (
+          <BookingConfirmation
+            userDetails={userDetails}
+            eventType={eventType}
+            theme={theme}
+            budget={budget}
+            decoration={decoration || ''}
+            onReset={reset}
+          />
         )}
       </main>
     </div>
