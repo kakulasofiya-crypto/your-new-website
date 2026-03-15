@@ -73,7 +73,7 @@ const ProductShowcase = ({ theme, budget, eventLabel, onReset }: Props) => {
 
         <div className="text-center">
           <Button onClick={onReset} size="lg" className="gap-2">
-            <PartyPopper className="h-5 w-5" /> Plan Another Event
+            <CheckCircle className="h-5 w-5" /> Proceed to Booking
           </Button>
         </div>
       </div>
